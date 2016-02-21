@@ -3,10 +3,13 @@ body {
 }
 
 .full-size {
+  background: url("../img/owen1.jpg") no-repeat center center;
+  background-size: cover;
+  /*
   background-image: url("../img/owen1.jpg");
   background-repeat: no-repeat;
-  /* background-size:100%; */
   background-size: cover;
+  */
   position: absolute;
   top: 0;
   bottom: 0;
