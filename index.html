@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Bad+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Molle:400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display+SC:900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Ceviche+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oregano' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Old+Standard+TT:700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Trochut:700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Miniver' rel='stylesheet' type='text/css'>
+    <!-- our CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <title>AACSYSO</title>
+  </head>
+  <!-- jquery CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <!-- sparkle plugin -->
+  <script src="js/jquery-canvas-sparkles.min.js"></script>
+  <body>
+    <div class="full-size" id="foreground-full-size" style="z-index:2">
+      <div class="middle-text">BLUMPKINS</div>
+    </div>
+    <div class="full-size" id="background-full-size" style="z-index:1"></div>
+  </body>
+  <script>
+    var fonts = [
+              '"Indie Flower", cursive',
+              '"Bad Script", cursive',
+              '"Dawning of a New Day", cursive',
+              '"Molle", cursive',
+              '"Playfair Display SC", serif',
+              '"Ceviche One", cursive',
+              '"Oregano", cursive',
+              '"Old Standard TT", serif',
+              '"Trochut", cursive',
+              '"Minivier", cursive',
+            ];
+
+    function changeFont() {
+      $(".middle-text").css({"font-family": fonts[Math.floor(Math.random()*fonts.length)]});
+    }
+
+    function changePicture() {
+      // all pictures in the format owen{NUMBER}.jpg in folder img
+      var max_picture = 6;
+      var image_string = 'url("img/owen'
+       + Math.ceil(Math.random()*max_picture) + '.jpg")';
+      // crossfading with the background visible
+      $("#foreground-full-size").fadeOut(700, function() {
+        $("#foreground-full-size").css({"background-image": image_string});
+      }).fadeIn(700);
+    }
+    
+    setInterval("changeFont()", 1000);
+    setInterval("changePicture()", 3141);
+
+    $(".full-size").click(function() {
+      if (Math.random() < 0.6) {
+        changePicture();
+      }
+      if (Math.random() < 0.33) {
+        changeFont();
+      }
+      // start and stop sparkles
+      $(".middle-text").trigger("start.sparkle");
+      setTimeout(function() {
+        $(".middle-text").trigger("stop.sparkle");
+      }, 1500);
+    });
+
+    $(document).ready(function() {
+      $(".middle-text").sparkle({
+        minSize: 2,
+        maxSize: 10,
+        overlap: 50,
+        count: 500
+      });
+      $(".middle-text")
+        .off("mouseover.sparkle")
+        .off("mouseout.sparkle")
+        .off("focus.sparkle")
+        .off("blur.sparkle");
+    });
+  </script>
+</html>
