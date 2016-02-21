@@ -14,7 +14,7 @@
     <link href='https://fonts.googleapis.com/css?family=Miniver' rel='stylesheet' type='text/css'>
     <!-- our CSS -->
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <title>AACSYSO</title>
+    <title>BLUMPKINS</title>
   </head>
   <!-- jquery CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -59,6 +59,7 @@
     setInterval("changePicture()", 3141);
 
     $(".full-size").click(function() {
+      // frustrating, isn't it? :)
       if (Math.random() < 0.6) {
         changePicture();
       }
@@ -72,7 +73,43 @@
       }, 1500);
     });
 
+    $("body").click(function(e) {
+      // make sparkle area
+      $("body").append('<div id="sparkle-circle"></div>');
+      var diameter = 150;
+      $("div#sparkle-circle").css({
+        position: "absolute", 
+        top: e.pageY - diameter / 2, 
+        left: e.pageX - diameter / 2, 
+        width: diameter,
+        height: diameter,
+        "-moz-border-radius": diameter / 2,
+        "-webkit-border-radius": diameter / 2,
+        "border-radius": diameter / 2,
+        "z-index": 3
+      });
+      // set sparkle options
+      $("div#sparkle-circle").sparkle({
+        minSize: 2,
+        maxSize: 20,
+        overlap: 50,
+        count: 50
+      });
+      $("div#sparkle-circle")
+        .off("mouseover.sparkle")
+        .off("mouseout.sparkle")
+        .off("focus.sparkle")
+        .off("blur.sparkle");
+      // start and stop sparkle
+      $("div#sparkle-circle").trigger("start.sparkle");
+      $("div#sparkle-circle").delay(2000).fadeOut(1000, function() {
+        this.trigger("stop.sparkle");
+        this.remove();
+      });
+    });
+
     $(document).ready(function() {
+      // default text sparkle options after load
       $(".middle-text").sparkle({
         minSize: 2,
         maxSize: 10,
