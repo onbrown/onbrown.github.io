@@ -1,18 +1,25 @@
+body {
+  overflow: hidden;
+}
+
 .full-size {
   background-image: url("../img/owen1.jpg");
-  background-repeat:no-repeat;
-  background-size:100%;
+  background-repeat: no-repeat;
+  /* background-size:100%; */
+  background-size: cover;
   position: absolute;
-  top:0;
-  bottom:0;
-  right:0;
-  left:0;
-  overflow:hidden; /* or overflow:auto; if you want scrollbars */
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden; /* or overflow:auto; if you want scrollbars */
 
+  /*
   text-align: center;
   vertical-align: middle;
   line-height: 100%;
   display: table-cell;
+  */
 }
 
 .middle-text {
